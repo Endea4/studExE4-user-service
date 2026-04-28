@@ -1,0 +1,29 @@
+### StudExE4 User Service API Tests
+### Requires the "REST Client" extension in VS Code
+### Run the server first: `cd services/user-service` -> `go run cmd/server/main.go`
+
+@baseUrl = http://localhost:8081
+
+### 1. Get All Users (For testing/admin)
+GET {{baseUrl}}/users
+
+### 2. Register New User via WhatsApp Bot (Only Phone Number)
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+    "phone": "628555555555"
+}
+
+### 3. Personalize User (Update Name & Gender)
+PUT {{baseUrl}}/users/628555555555/personalize
+Content-Type: application/json
+
+{
+    "name": "Siti",
+    "display_name": "Siti A.",
+    "gender": "Female"
+}
+
+### 4. Delete User (For testing)
+DELETE {{baseUrl}}/users/6285331886336
