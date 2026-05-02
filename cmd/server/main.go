@@ -38,6 +38,17 @@ func main() {
 		c.JSON(http.StatusOK, users)
 	})
 
+	// --- 1.5 Get single user by phone ---
+	r.GET("/users/:phone", func(c *gin.Context) {
+		phone := c.Param("phone")
+		user, err := userRepo.GetUserByPhone(context.Background(), phone)
+		if err != nil {
+			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+			return
+		}
+		c.JSON(http.StatusOK, user)
+	})
+
 	// --- 2. "Bot registers number" (Create minimal user) ---
 	r.POST("/users/register", func(c *gin.Context) {
 		var req struct {

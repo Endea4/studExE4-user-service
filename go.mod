@@ -3,8 +3,8 @@ module github.com/Endea4/studExE4-user-service
 go 1.25.0
 
 require (
-	github.com/gin-gonic/gin v1.12.0
 	github.com/Endea4/studExE4-user-service/shared v0.0.0-00010101000000-000000000000
+	github.com/gin-gonic/gin v1.12.0
 	go.mongodb.org/mongo-driver v1.17.9
 )
 
