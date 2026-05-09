@@ -123,6 +123,15 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "User deleted successfully"})
 	})
 
-	port := config.GetEnv("USER_SERVICE_PORT", "8081")
+	r.GET("/docs", func(c *gin.Context) {
+		c.Data(http.StatusOK, "text/html; charset=utf-8", []byte(`<!DOCTYPE html>
+<html><head><link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css"></head>
+<body><div id="swagger-ui"></div>
+<script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js" crossorigin></script>
+<script>SwaggerUIBundle({url:"/docs/openapi.yaml",dom_id:"#swagger-ui"})</script></body></html>`))
+	})
+	r.StaticFile("/docs/openapi.yaml", "docs/openapi.yaml")
+
+	port := config.GetEnv("USER_SERVICE_PORT", "9081")
 	r.Run(":" + port)
 }
