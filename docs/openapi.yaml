@@ -5,6 +5,8 @@ info:
   version: "1.0.0"
 
 servers:
+  - url: http://localhost:9081
+    description: Direct (user-service)
   - url: http://localhost:9080
     description: Via API Gateway
 
