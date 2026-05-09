@@ -1,0 +1,170 @@
+openapi: "3.0.3"
+info:
+  title: User Service
+  description: Identity management — phone, name, gender, customer profile, saved locations
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:9080
+    description: Via API Gateway
+
+tags:
+  - name: Users
+    description: User identity operations
+
+paths:
+  /users:
+    get:
+      tags: [Users]
+      summary: List all users
+      responses:
+        "200":
+          description: Array of users
+          content:
+            application/json:
+              example:
+                - id: "663f1234..."
+                  phone: "628123456789"
+                  name: Rio
+                  display_name: "Rio S."
+                  gender: Male
+                  customer_profile:
+                    reputation_score: 5.0
+                    total_orders: 0
+                    total_cancels: 0
+                  created_at: "2026-05-05T00:00:00Z"
+
+  /users/register:
+    post:
+      tags: [Users]
+      summary: Register new user by phone
+      description: Creates User document with embedded CustomerProfile. Used by bot on first message.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [phone]
+              properties:
+                phone:
+                  type: string
+                  example: "628123456789"
+      responses:
+        "201":
+          description: New user created
+          content:
+            application/json:
+              example:
+                message: "User registered via Bot"
+                user:
+                  id: "663f..."
+                  phone: "628123456789"
+                  customer_profile:
+                    reputation_score: 5.0
+                    total_orders: 0
+                    total_cancels: 0
+        "409":
+          description: User already exists
+
+  /users/{phone}:
+    get:
+      tags: [Users]
+      summary: Get user by phone
+      parameters:
+        - name: phone
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "628123456789"
+      responses:
+        "200":
+          description: User object
+        "404":
+          description: User not found
+
+    delete:
+      tags: [Users]
+      summary: Delete user by phone
+      parameters:
+        - name: phone
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User deleted
+
+  /users/{phone}/personalize:
+    put:
+      tags: [Users]
+      summary: Update user profile (bot onboarding)
+      parameters:
+        - name: phone
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Rio Saputro"
+                display_name:
+                  type: string
+                  example: "Rio S."
+                gender:
+                  type: string
+                  example: Male
+      responses:
+        "200":
+          description: Profile updated
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        phone:
+          type: string
+        name:
+          type: string
+        display_name:
+          type: string
+        gender:
+          type: string
+        customer_profile:
+          type: object
+          properties:
+            reputation_score:
+              type: number
+            total_orders:
+              type: integer
+            total_cancels:
+              type: integer
+        saved_locations:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              latitude:
+                type: number
+              longitude:
+                type: number
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
