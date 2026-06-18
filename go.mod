@@ -3,7 +3,7 @@ module github.com/Endea4/studExE4-user-service
 go 1.25.0
 
 require (
-	github.com/Endea4/studExE4-shared v0.0.0-00010101000000-000000000000
+	github.com/Endea4/studExE4-shared v1.0.0
 	github.com/IBM/sarama v1.50.1
 	github.com/gin-gonic/gin v1.12.0
 	github.com/redis/go-redis/v9 v9.19.0
@@ -63,5 +63,3 @@ require (
 	golang.org/x/text v0.37.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 )
-
-replace github.com/Endea4/studExE4-shared => ../studExE4-shared

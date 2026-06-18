@@ -1,3 +1,5 @@
+github.com/Endea4/studExE4-shared v1.0.0 h1:4eoLzblyGoQcD1M5nSL8DduHkc9AZe7jF5Xc+5S7CVc=
+github.com/Endea4/studExE4-shared v1.0.0/go.mod h1:lHXY5yYF2tqMMykaKoW2zRCjcISWnCcHA7ok3EhkeW0=
 github.com/IBM/sarama v1.50.1 h1:OcXFv571hg+h6N8NL3mFIEdK+80t1m51kf/KZQtbfPA=
 github.com/IBM/sarama v1.50.1/go.mod h1:+ggHBIXkEU3KXhAm2nCzCu7ohBD1pBIaXCRk1ftPkjY=
 github.com/bsm/ginkgo/v2 v2.12.0 h1:Ny8MWAHyOepLGlLKYmXG4IEkioBysk6GpaRTLC8zwWs=
