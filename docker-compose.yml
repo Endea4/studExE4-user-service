@@ -1,0 +1,15 @@
+services:
+  user-service:
+    build: .
+    container_name: studexe4-user-service
+    ports:
+      - "9086:9086"
+    env_file:
+      - .env.example
+    networks:
+      - studex-net
+    restart: unless-stopped
+
+networks:
+  studex-net:
+    driver: bridge
